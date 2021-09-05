@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { useFetch } from '../hooks/useFetch';
 import {getCurrentWeatherUrl, getWeatherIconUrl} from '../api/accuweather';
+import Grow from '@material-ui/core/Grow';
 
 const CurrentCityWeather = () => {
   const { response, fetchData } = useFetch();
@@ -22,28 +23,68 @@ const CurrentCityWeather = () => {
   },[response])
 
   return (
-    <CurrentCityWeatherDiv>
-         { currentWeather &&
-           <div >
-            <h2>{currentLocation.city}</h2>
-            <img src={getWeatherIconUrl(currentWeather.WeatherIcon)} alt="" />
-            {currentWeather.WeatherText}
-            {currentWeather.Temperature['Metric'].Value}
-            {currentWeather.Temperature['Metric'].Unit}
+    <>
+    {currentWeather &&  
+      <Grow in={currentWeather ? true : false}>
+      <CurrentCityDiv>
+        <div>
+          <div className="city-name">{currentLocation.city}</div>
+        </div>
+        <div>
+          <img src={getWeatherIconUrl(currentWeather.WeatherIcon)} alt="" />
+        </div>
+        <div>
+          <div className="weather-value">
+            {`${currentWeather.Temperature['Metric'].Value}`}
+            <div className="temperature-mode">{currentWeather.Temperature['Metric'].Unit}</div>
           </div>
-        }
-       
-    </CurrentCityWeatherDiv>
+          <div className="weather-text">
+            {`(${currentWeather.WeatherText})`}
+          </div>
+          
+        </div>
+      </CurrentCityDiv>
+      </Grow>
+    }
+    </>
   )
+ 
 }
 
 export default CurrentCityWeather;
 
-const CurrentCityWeatherDiv = styled.div`
+const CurrentCityDiv = styled.div`
   width: 80%;
-  min-width: 200px;
-  height: 200px;
-  box-shadow: 1px 1px 2px grey;
   margin: 30px auto;
-  background-color: grey;
-`
+  text-align: center;
+  display: grid;
+  grid-template-columns: 30% 34% 30%;
+  grid-column-gap: 2%;
+  text-align: center;
+  font-size: 1.6rem;
+  & > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  .weather-text  {
+    margin-left: 20px;
+  }
+  .weather-value  {
+    position: relative;
+  }
+  .city-name {
+    text-transform: uppercase;
+  }
+  .temperature-mode {
+    position: absolute;
+    top: -5px;
+    right: -15px;
+    font-size: 1.2rem;
+  }
+  img {
+    width: 200px;
+  }
+`;

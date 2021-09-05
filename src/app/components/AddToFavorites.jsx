@@ -7,7 +7,7 @@ const AddToFavorites = () => {
   const {currentLocation, favoritesArray} = useSelector(state => state);
   const [isLocationSaved, setIsLocationSaved] = useState(false);
   const dispatch = useDispatch();
-  
+
   useEffect(()=> {
       if (currentLocation) {
         // debugger

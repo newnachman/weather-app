@@ -44,32 +44,3 @@ export const useFetch = () => {
   
 	return { response, fetchData}
 }
-
-
-
-
-
-export const useCall = (url) => {
-
-  const [state, setState] = useState({data: null, loading: true});
-
-  useEffect(() => {
-    setState(state => ({data: state.data, loading: true}));
-    if (!url) {
-      return;
-    }
-    axios.request({
-        method: 'GET',
-        url: url,
-      }).then((response) => {
-         let responseData = response.data;
-         setState({data: responseData, loading: false});
-         console.log('response of useCall request: ', responseData, 'loading is: ', state.loading);
-      }).catch(error => {
-        setState(state => ({data: state.data, loading: false}));
-        console.log('response error of useCall request: ', error);
-    });
-  }, [url])
-
-  return state;
-};
