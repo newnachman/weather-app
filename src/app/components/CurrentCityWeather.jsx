@@ -13,7 +13,7 @@ const CurrentCityWeather = () => {
     if (currentLocation?.key) {
       fetchData('CURRENT_WEATHER', getCurrentWeatherUrl(currentLocation.key));
     }
-  }, [currentLocation.key, fetchData]);
+  }, [currentLocation?.key, fetchData]);
   
   useEffect(() => {
     if (response.data && !response.loading) {
