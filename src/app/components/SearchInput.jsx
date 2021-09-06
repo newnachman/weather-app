@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import { useFetch } from '../hooks/useFetch';
 import {getCitiesAutocompleteUrl} from '../api/accuweather';
 import { useDispatch } from 'react-redux';
-import { defaultLocation } from '../api/accuweather';
-import { setCurrentLocation } from './../redux/Actions';
+import { defaultLocation, defaultTemperatureMode } from '../api/accuweather';
+import { setCurrentLocation, changeTemperatureMode } from './../redux/Actions';
 
 const SearchInput = () => {
   const { response, fetchData } = useFetch();
@@ -16,6 +16,7 @@ const SearchInput = () => {
 
   useEffect(() => {
      dispatch(setCurrentLocation(defaultLocation));
+     dispatch(changeTemperatureMode(defaultTemperatureMode));
   }, [dispatch]);
 
   useEffect(()=>{

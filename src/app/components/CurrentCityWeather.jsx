@@ -61,16 +61,17 @@ const CurrentCityDiv = styled.div`
   grid-template-columns: 30% 34% 30%;
   grid-column-gap: 2%;
   text-align: center;
-  font-size: 1.6rem;
   & > div {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5em;
-    font-weight: bold;
+    font-size: 2.3rem;
+    font-weight: 700;
   }
   .weather-text  {
-    margin-left: 20px;
+    margin-left: 30px;
+    font-size: 1.8rem;
+    font-weight: 400;
   }
   .weather-value  {
     position: relative;

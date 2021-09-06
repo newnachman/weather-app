@@ -3,7 +3,7 @@ const InitialState = {
     currentLocation: {},
     favoritesArray: [],
     themeIsDark: false,
-    temperatureIsFahrenheit: {status: false, data: 'Metric'},
+    temperatureMode: {},
 }
 
 export default InitialState;

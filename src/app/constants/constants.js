@@ -4,7 +4,7 @@ export const constants = {
         LIGHT: false
    },
    TEMPERATURE_MODE: {
-        DARK: true,
-        LIGHT: false
+     CELSIUS: {mode: 'Metric', data: 'Celsius', unit: 'C'},
+     FAHRENHEIT: {mode: 'Imperial', data: 'Fahrenheit', unit: 'F'},
    } 
 }

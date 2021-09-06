@@ -13,10 +13,9 @@ export const useFetch = () => {
   const [response, setResponse] = useState({data: null, loading: false, error: null});
 
   const fetchData = useCallback(
-    // Function for triggering useEffect by changing state (activate fetch):
     (fetchDetail, fetchedUrl, fetchedMethod = "GET", fetchedData = null) => {
+      // Function for triggering useEffect by changing state (activate fetch):
       console.log('[ Fetch Detail: ', fetchDetail, ' ] url: ', fetchedUrl, ' method: ', fetchedMethod, 'data: ',  fetchedData);
-
       setUrl(fetchedUrl);
       setMethod(fetchedMethod);
       setFetchedData(fetchedData);
@@ -42,5 +41,5 @@ export const useFetch = () => {
     });
   }, [url, method, fetchedData])
   
-	return { response, fetchData}
+	return { response, fetchData }
 }

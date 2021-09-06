@@ -1,6 +1,16 @@
 
+
+// Default initial weather data:
+export const defaultLocation = {city: "Tel-Aviv", key: '215854'}; 
+
+export const defaultTemperatureMode = {mode: 'Metric', data: 'Celsius', unit: 'C'}; 
+
+
+// Api key:
 export const accuweatherApiKey = '?apikey=' + process.env.REACT_APP_ACCUWEATHER_API_KEY;
 
+
+// Creating dynamic URLs for fetching Api:
 export const getCurrentWeatherUrl = (locationKey) => {
     if (!locationKey) {
         return false;
@@ -8,8 +18,8 @@ export const getCurrentWeatherUrl = (locationKey) => {
     return 'http://dataservice.accuweather.com/currentconditions/v1/' + locationKey + accuweatherApiKey;
 }
 
-export const getForecastWeatherUrl = (locationKey) => {
-    return 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/' + locationKey + accuweatherApiKey;
+export const getForecastWeatherUrl = (locationKey, isMetric) => {
+    return 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/' + locationKey + accuweatherApiKey + '&metric=' + isMetric;
 }
 
 export const getCitiesAutocompleteUrl = (searchKey) => {
@@ -24,7 +34,6 @@ export const getWeatherIconUrl = (iconNumber) => {
     return 'https://developer.accuweather.com/sites/default/files/' + iconNumber + '-s.png';
 }
 
-export const defaultLocation = {city: "tel-aviv", key: '215854'}; 
 
 
 
