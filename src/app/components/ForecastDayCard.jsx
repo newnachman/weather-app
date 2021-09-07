@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { getWeatherIconUrl } from '../api/accuweather';
 import { getFormattedDate } from '../helpers/getDate';
 
+
 const ForecastDayCard = (props) => {
 
   const {data} = props;

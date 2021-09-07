@@ -2,21 +2,33 @@ import React from 'react';
 import FavoritesContainer from '../../app/components/FavoritesContainer';
 import Navbar from './../components/NavBar';
 import { useSelector, useDispatch } from 'react-redux';
+import styled from 'styled-components';
+
 
 const Favorites = () => {
 
   const {currentLocation, favoritesArray} = useSelector(state => state);
   const dispatch = useDispatch();
 
-  console.log('Favorites page: currentLocation, favoritesArray: ', currentLocation, favoritesArray)
 
   return (
-    <div>
-      Favorites
+    <>
       <Navbar/>
-      <FavoritesContainer/>
-    </div>
+      <MainContainer>
+        <FavoritesContainer/>
+      </MainContainer>
+    </>
   )
 }
 
 export default Favorites;
+
+const MainContainer = styled.div`
+  width: 70%;
+  padding: 10px;
+  margin: 50px auto;
+
+  @media screen and (max-width: 600px){
+    width: 95%;
+  }
+`;

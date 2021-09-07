@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useFetch } from '../hooks/useFetch';
 import { useSelector } from 'react-redux';
 import { getForecastWeatherUrl } from '../api/accuweather';
+import { constants } from '../constants/constants';
 
 
 const ForecastNextDays = () => {
@@ -13,12 +14,10 @@ const ForecastNextDays = () => {
   const temperatureMode = useSelector(state => state.temperatureMode)
   const [forecastWeather, setForecastWeather] = useState();
 
-  console.log('````````````temperatureMode: ', temperatureMode)
 
   useEffect(() => {
-    console.log('currentLocation?.key , temperatureMode.data', currentLocation?.key, temperatureMode.data)
     if (currentLocation?.key && temperatureMode?.data) {
-      fetchData( 'FORECAST_WEATHER', getForecastWeatherUrl(currentLocation.key, (temperatureMode.data === 'Celsius')));
+      fetchData( 'FORECAST_WEATHER', getForecastWeatherUrl(currentLocation.key, (temperatureMode.data === constants.TEMPERATURE_MODE.CELSIUS.data)));
     }
   }, [currentLocation?.key, fetchData, temperatureMode?.data]);
   
