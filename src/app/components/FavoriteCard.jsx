@@ -1,12 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { useHistory } from 'react-router-dom';
 
 const FavoriteCard = (props) => {
   const {data} = props;
+  const history = useHistory();
+
+  // redirect user to the specific city main page:
+  const goMainWithCurrentCity = (id) => {
+    history.push(`/main/${id}`);
+  }
 
   return (
-    <ForecastDayCardDiv>
+    <ForecastDayCardDiv onClick={()=> {goMainWithCurrentCity(`${data.city}::${data.key}`)}}>
       <div>
         {data.city}
         {/* {  getFormattedDate(data.Date)  }  */}

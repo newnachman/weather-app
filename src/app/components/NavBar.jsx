@@ -29,10 +29,10 @@ const Navbar = () => {
        </div>
        <ul className={`${menuIsDisplayed ? "display" : ""}`}>
          <li onClick={closeMenu}>
-           <a tabIndex="3" href="main">MAIN</a>
+           <a tabIndex="3" href="/main">MAIN</a>
          </li>
          <li onClick={closeMenu}>
-           <a tabIndex="4" href="favorites">FAVORITES</a>
+           <a tabIndex="4" href="/favorites">FAVORITES</a>
          </li>
          <li onClick={closeMenu}>
            <a tabIndex="5" href="/#about">GO DARK MODE</a>

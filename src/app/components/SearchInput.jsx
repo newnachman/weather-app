@@ -7,17 +7,31 @@ import {getCitiesAutocompleteUrl} from '../api/accuweather';
 import { useDispatch } from 'react-redux';
 import { defaultLocation, defaultTemperatureMode } from '../api/accuweather';
 import { setCurrentLocation, changeTemperatureMode } from './../redux/Actions';
+import { useParams } from 'react-router-dom';
+
 
 const SearchInput = () => {
+  const { id } = useParams();
   const { response, fetchData } = useFetch();
   const [cities, setCities] = React.useState([]);
   const [searchWord, setSearchWord] = React.useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
-     dispatch(setCurrentLocation(defaultLocation));
+    let currentLoc = createCurrentLocationFromParam(id);
+    console.log('currentLoc', currentLoc)
+     dispatch(setCurrentLocation(currentLoc));
      dispatch(changeTemperatureMode(defaultTemperatureMode));
-  }, [dispatch]);
+  }, [dispatch, id]);
+
+  const createCurrentLocationFromParam = (param) => {
+    if (!param || !param.includes("::")) {
+      console.log('no param || no include ::')
+      return defaultLocation;
+    } 
+    let paramArray = param.split("::");
+    return {city: paramArray[0], key: paramArray[1]};
+  }
 
   useEffect(()=>{
     if (searchWord) {
