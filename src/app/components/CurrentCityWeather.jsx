@@ -31,7 +31,7 @@ const CurrentCityWeather = () => {
           <div className="city-name">{currentLocation.city}</div>
         </div>
         <div>
-          <img src={getWeatherIconUrl(currentWeather.WeatherIcon)} alt="" />
+          <img src={getWeatherIconUrl(currentWeather.WeatherIcon)} alt={currentWeather.WeatherText} />
         </div>
         <div>
           <div className="weather-value">

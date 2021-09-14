@@ -36,7 +36,7 @@ const FavoritesContainer = () => {
       </FavoritesTitle>
       <FavoritesCardWrapper>
         {favoritesData.map((item, i) => {
-          return <FavoriteCard key={i} data={item} />
+          return <FavoriteCard key={i} data={item} itemKey={i} />
         })}
       </FavoritesCardWrapper>
     </section>
@@ -57,6 +57,6 @@ const FavoritesCardWrapper = styled.div`
   display: grid;
   grid-template-columns: 18% 18% 18% 18% 18%;
   grid-column-gap: 2.5%;
+  grid-row-gap: 20px;
   text-align: center;
-
 `;

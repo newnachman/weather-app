@@ -11,7 +11,7 @@ export const reducer = (state = InitialState, action) => {
       return { ...state, favoritesArray: [...state.favoritesArray, action.newItem] }; 
 
     case ActionsTypes.FAVORITE_REMOVE:
-      return { ...state, favoritesArray: state.favoritesArray.filter(items =>  items !== action.itemToDelete)};
+      return { ...state, favoritesArray: state.favoritesArray.filter(item =>  item.key !== action.itemToDelete.key)};
      
     case ActionsTypes.THEME_MODE:
       return {...state, themeIsDark: action.themeMode }; 
