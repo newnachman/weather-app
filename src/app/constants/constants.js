@@ -4,7 +4,7 @@ export const constants = {
         LIGHT: false
    },
    TEMPERATURE_MODE: {
-     CELSIUS: {mode: 'Metric', data: 'Celsius', unit: 'C'},
-     FAHRENHEIT: {mode: 'Imperial', data: 'Fahrenheit', unit: 'F'},
+     CELSIUS: {mode: 'Metric', name: 'Celsius', unit: 'C'},
+     FAHRENHEIT: {mode: 'Imperial', name: 'Fahrenheit', unit: 'F'},
    } 
 }

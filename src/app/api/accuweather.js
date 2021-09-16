@@ -1,9 +1,10 @@
 
 
 // Default initial weather data:
-export const defaultLocation = {city: "Tel-Aviv", key: '215854'}; 
+export const defaultLocation = {city: "Tel-Aviv", country: 'Israel', key: '215854'}; 
 
-export const defaultTemperatureMode = {mode: 'Metric', data: 'Celsius', unit: 'C'}; 
+export const defaultTemperatureMode = {mode: 'Metric', name: 'Celsius', unit: 'C'}; 
+// export const defaultTemperatureMode = {mode: 'Imperial', name: 'Fahrenheit', unit: 'F'}; 
 
 
 // Api key:

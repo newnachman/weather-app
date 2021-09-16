@@ -14,15 +14,15 @@ const FavoritesContainer = () => {
     if (favoritesArray?.length > 0) {
       setFavoritesData([]);
       favoritesArray.forEach((element, i) => {
-        createFavoriteDataArray(element.key, element.city);
+        createFavoriteDataArray(element.key, element.city, element.country);
       });
     }
   }, [favoritesArray]);
 
    
-  const createFavoriteDataArray = (key, city) => {
+  const createFavoriteDataArray = (key, city, country) => {
     axios.request({ url: getCurrentWeatherUrl(key) }).then((result) => {
-      setFavoritesData( (data) => ([...data, {key: key, city: city, detail: result.data[0]} ] ))
+      setFavoritesData( (favorites) => ([...favorites, {key, city, country, detail: result.data[0]} ] ))
     }).catch(error => {
       console.log('response error of createFavoriteDataArray request: ', error);
   });
@@ -35,8 +35,8 @@ const FavoritesContainer = () => {
       Favorites:
       </FavoritesTitle>
       <FavoritesCardWrapper>
-        {favoritesData.map((item, i) => {
-          return <FavoriteCard key={i} data={item} itemKey={i} />
+        {favoritesData.map((favorite, i) => {
+          return <FavoriteCard key={i} data={favorite} itemKey={i} />
         })}
       </FavoritesCardWrapper>
     </section>

@@ -8,9 +8,10 @@ import { useDispatch } from 'react-redux';
 import { defaultLocation, defaultTemperatureMode } from '../api/accuweather';
 import { setCurrentLocation, changeTemperatureMode } from './../redux/Actions';
 import { useParams } from 'react-router-dom';
-
+import { createLocationsObjects } from '../helpers/createLocationObjects';
 
 const SearchInput = () => {
+
   const { id } = useParams();
   const { response, fetchData } = useFetch();
   const [cities, setCities] = React.useState([]);
@@ -26,11 +27,10 @@ const SearchInput = () => {
 
   const createCurrentLocationFromParam = (param) => {
     if (!param || !param.includes("::")) {
-      console.log('no param || no include ::')
       return defaultLocation;
     } 
     let paramArray = param.split("::");
-    return {city: paramArray[0], key: paramArray[1]};
+    return {city: paramArray[0], country: paramArray[1], key: paramArray[2]};
   }
 
   useEffect(()=>{
@@ -41,25 +41,27 @@ const SearchInput = () => {
 
   useEffect(() => {
     if (!response?.loading && response?.data ) {
-      setCities(response.data);
+      setCities(createLocationsObjects(response.data));
     }
   },[response]);
 
+
+  // Updates the location objects when choosing a new city in search field:
   const updateLocation = (value) => {
-    if (value?.LocalizedName && value?.Key) {
-      dispatch(setCurrentLocation({city: value.LocalizedName, key: value.Key}));
+    if (value?.locationCity && value?.locationCountry && value?.locationKey) {
+      dispatch(setCurrentLocation({city: value.locationCity, country: value.locationCountry, key: value.locationKey}));
     }
   }
 
   return (
      <SearchInputDiv>
         <SearchBox
-          getOptionSelected ={(option, value) => option.LocalizedName === value.LocalizedName}
+          getOptionSelected ={(option, value) => option.locationDisplay === value.locationDisplay}
           onInputChange = { (e) => { setSearchWord(e.target.value) }}
           onChange = { (e, value) => { updateLocation(value) }}
           id="combo-box-demo"
           options={cities}
-          getOptionLabel={(option) => option.LocalizedName}
+          getOptionLabel={(option) => option.locationDisplay}
           renderInput={(params) => <TextField {...params} label="search city" variant="outlined" />}
         />
      </SearchInputDiv>
@@ -69,7 +71,8 @@ const SearchInput = () => {
 export default SearchInput;
 
 const SearchInputDiv = styled.div`
-  background-color: #003c7d;
+  /* background-color: #003c7d; */
+  background-color: #214163;
   color: #ffffff;
   width: 100%;
   margin: auto;
@@ -83,15 +86,6 @@ const SearchBox = styled(Autocomplete)`
   margin: auto;
   outline: none !important;
   border: none !important;
-
-  /* .MuiFormLabel-root.Mui-focused {
-    color: #003c7d;
-    background-color: #ffffff;
-    padding: 10px;
-    border-radius: 0.5rem;
-    outline: none;
-    /* transform: translate(8px, 11px) scale(1); */
-  
 
   .MuiInputLabel-outlined {
     z-index: 1;

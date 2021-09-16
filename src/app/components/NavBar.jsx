@@ -1,15 +1,37 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import { useDispatch } from 'react-redux';
+import { changeTemperatureMode, changeThemeMode } from './../redux/Actions';
+import { useSelector } from 'react-redux';
+import { constants } from '../constants/constants';
 
 const Navbar = () => {
+// THEME_MODE
+  const themeIsDark = useSelector(state => state.themeIsDark);
+  const temperatureMode = useSelector(state => state.temperatureMode);
+  const [isFahrenheit, setIsFahrenheit] = useState();
+  const dispatch = useDispatch();
+  const [menuIsDisplayed, setMenuIsDisplayed] = useState(false);
 
-  const [menuIsDisplayed, setMenuIsDisplayed] = useState(false)
+  useEffect(() => {
+    setIsFahrenheit(temperatureMode.unit === 'F')
+  }, [temperatureMode]);
+
+  const toggleTemperatureMode = () => {
+    let changeTemperatureTo = 
+          isFahrenheit 
+          ? 
+          constants.TEMPERATURE_MODE.CELSIUS 
+          : 
+          constants.TEMPERATURE_MODE.FAHRENHEIT;
+    dispatch(changeTemperatureMode(changeTemperatureTo));
+  }
+
+  const toggleTheme = () => {
+    dispatch(changeThemeMode(!themeIsDark));
+  }
 
   const toggleMenu = () => {
     setMenuIsDisplayed(!menuIsDisplayed);
-  }
-
-  const closeMenu = () => {
-    setMenuIsDisplayed(false);
   }
 
   return (
@@ -28,17 +50,17 @@ const Navbar = () => {
         </button>
        </div>
        <ul className={`${menuIsDisplayed ? "display" : ""}`}>
-         <li onClick={closeMenu}>
+         <li>
            <a tabIndex="3" href="/main">MAIN</a>
          </li>
-         <li onClick={closeMenu}>
+         <li>
            <a tabIndex="4" href="/favorites">FAVORITES</a>
          </li>
-         <li onClick={closeMenu}>
-           <a tabIndex="5" href="/#about">GO DARK MODE</a>
+         <li onClick={toggleTheme}>
+           {themeIsDark ? "GO LIGHT MODE" : "GO DARK MODE"}
          </li>
-         <li onClick={closeMenu}>
-           <a tabIndex="6" href="/#methods">GO CELSIUS</a>
+         <li onClick={toggleTemperatureMode}>
+           {isFahrenheit ? "GO CELSIUS" : "GO FAHRENHEIT"}
          </li>
        </ul>
      </nav>

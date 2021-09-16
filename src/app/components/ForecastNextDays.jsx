@@ -16,10 +16,10 @@ const ForecastNextDays = () => {
 
 
   useEffect(() => {
-    if (currentLocation?.key && temperatureMode?.data) {
-      fetchData( 'FORECAST_WEATHER', getForecastWeatherUrl(currentLocation.key, (temperatureMode.data === constants.TEMPERATURE_MODE.CELSIUS.data)));
+    if (currentLocation?.key && temperatureMode?.name) {
+      fetchData( 'FORECAST_WEATHER', getForecastWeatherUrl(currentLocation.key, (temperatureMode.name === constants.TEMPERATURE_MODE.CELSIUS.name)));
     }
-  }, [currentLocation?.key, fetchData, temperatureMode?.data]);
+  }, [currentLocation?.key, fetchData, temperatureMode?.name]);
   
   useEffect(() => {
     if (response.data && !response.loading) {
@@ -30,9 +30,9 @@ const ForecastNextDays = () => {
 
   return ( forecastWeather ?
     <section>
-      <ForecastNextDaysTitle>
+      <h2>
         Next Day Forecast:
-      </ForecastNextDaysTitle>
+      </h2>
       <ForecastDayCardWrapper>
         {forecastWeather.DailyForecasts.map((day, i) => {
           return <ForecastDayCard key={i} data={day} />
@@ -46,9 +46,9 @@ const ForecastNextDays = () => {
 
 export default ForecastNextDays;
 
-const ForecastNextDaysTitle = styled.h2`
-color: #003c7d;
-`;
+// const ForecastNextDaysTitle = styled.h2`
+// color: #003c7d;
+// `;
 
 const ForecastDayCardWrapper = styled.div`
   display: grid;

@@ -4,6 +4,7 @@ export const GlobalStyle = createGlobalStyle`
 
 body {
   margin: 0;
+  height: 100vh;
 }
 
 div {
@@ -64,13 +65,13 @@ fieldset {
 }
 
 .MODE_DARK {
-  background-color: #3a3939;
+  background-color: #01254c;
   color: white;
 }
 
 .MODE_LIGHT {
   background-color: white;
-  color: #3a3939;
+  color: #003c7d;
 }
 
 @media screen and (max-width: 600px){

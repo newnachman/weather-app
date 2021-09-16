@@ -41,9 +41,12 @@ const FavoriteCard = (props) => {
     // }
     // </>
     <Grow in={data ? true : false} style={{ transformOrigin: '0 0 0' }} {...(data ? { timeout: (1000 * (itemKey + 1))} : {})}>
-      <FavoriteCardDiv onClick={()=> {goMainWithCurrentCity(`${data.city}::${data.key}`)}}>
-        <div className=" ">
+      <FavoriteCardDiv onClick={()=> {goMainWithCurrentCity(`${data.city}::${data.country}::${data.key}`)}}>
+        <div className="city">
           {data.city}
+        </div>
+        <div className="country">
+          ({data.country})
         </div>
         <div>
           <img src={getWeatherIconUrl(data.detail.WeatherIcon)} alt={data.detail.WeatherText} />
@@ -65,6 +68,7 @@ export default FavoriteCard;
 
 
 const FavoriteCardDiv = styled.div`
+  cursor: pointer;
   border: 1px solid grey;
   min-height: 150px;
   padding-top: 20px;

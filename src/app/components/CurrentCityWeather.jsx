@@ -8,7 +8,9 @@ import Grow from '@material-ui/core/Grow';
 const CurrentCityWeather = () => {
   const { response, fetchData } = useFetch();
   const currentLocation = useSelector(state => state.currentLocation)
+  const temperatureMode = useSelector(state => state.temperatureMode)
   const [currentWeather, setCurrentWeather] = useState();
+  // const temperatureMode = {mode: defaultTemperatureMode.mode, name: defaultTemperatureMode.name};
 
   useEffect(() => {
     if (currentLocation?.key) {
@@ -28,15 +30,19 @@ const CurrentCityWeather = () => {
       <Grow in={currentWeather ? true : false}>
       <CurrentCityDiv>
         <div>
-          <div className="city-name">{currentLocation.city}</div>
+          <div className="city-name">
+            {currentLocation.city}
+            <div className="sub-value-note">{currentLocation.country}</div>
+          </div>
+          
         </div>
         <div>
           <img src={getWeatherIconUrl(currentWeather.WeatherIcon)} alt={currentWeather.WeatherText} />
         </div>
-        <div>
-          <div className="weather-value">
-            {`${currentWeather.Temperature['Metric'].Value}`}
-            <div className="temperature-mode">{currentWeather.Temperature['Metric'].Unit}</div>
+        <div title={temperatureMode.name}>
+          <div className="weather-value" >
+            {`${currentWeather.Temperature[temperatureMode.mode].Value}`}
+            <div className="sub-value-note" >{currentWeather.Temperature[temperatureMode.mode].Unit}</div>
           </div>
           <div className="weather-text">
             {`(${currentWeather.WeatherText})`}
@@ -73,17 +79,22 @@ const CurrentCityDiv = styled.div`
     font-size: 1.8rem;
     font-weight: 400;
   }
-  .weather-value  {
+  .weather-value, .city-name  {
     position: relative;
   }
   .city-name {
     text-transform: uppercase;
   }
-  .temperature-mode {
+  .sub-value-note {
     position: absolute;
-    top: -5px;
-    right: -15px;
+    top: -15px;
+    right: -25px;
     font-size: 1.2rem;
+    color: #ff5e2b;
+  }
+  .weather-value .sub-value-note  {
+    top: -10px;
+    right: -15px;
   }
   img {
     width: 200px;
