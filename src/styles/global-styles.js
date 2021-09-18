@@ -5,6 +5,18 @@ export const GlobalStyle = createGlobalStyle`
 body {
   margin: 0;
   height: 100vh;
+  background-color: ${props => props.theme.backgroundColor};
+  color: ${props => props.theme.color};
+}
+
+.MODE_DARK {
+  background-color: #01254c;
+  color: white;
+}
+
+.MODE_LIGHT {
+  background-color: white;
+  color: #003c7d;
 }
 
 div {
@@ -62,16 +74,6 @@ nav ul {
 
 fieldset {
   display: none !important;
-}
-
-.MODE_DARK {
-  background-color: #01254c;
-  color: white;
-}
-
-.MODE_LIGHT {
-  background-color: white;
-  color: #003c7d;
 }
 
 @media screen and (max-width: 600px){

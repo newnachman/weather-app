@@ -4,7 +4,6 @@ import SearchInput from '../components/SearchInput';
 import Navbar from './../components/NavBar';
 import styled from 'styled-components';
 
-
 const Main = () => {
 
   return (

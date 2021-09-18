@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useFetch } from '../hooks/useFetch';
 import {getCitiesAutocompleteUrl} from '../api/accuweather';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { defaultLocation, defaultTemperatureMode } from '../api/accuweather';
 import { setCurrentLocation, changeTemperatureMode } from './../redux/Actions';
 import { useParams } from 'react-router-dom';
@@ -13,6 +14,7 @@ import { createLocationsObjects } from '../helpers/createLocationObjects';
 const SearchInput = () => {
 
   const { id } = useParams();
+  const themeIsDark = useSelector(state => state.themeIsDark);
   const { response, fetchData } = useFetch();
   const [cities, setCities] = React.useState([]);
   const [searchWord, setSearchWord] = React.useState('');
@@ -56,6 +58,7 @@ const SearchInput = () => {
   return (
      <SearchInputDiv>
         <SearchBox
+          themeIsDark = {themeIsDark}
           getOptionSelected ={(option, value) => option.locationDisplay === value.locationDisplay}
           onInputChange = { (e) => { setSearchWord(e.target.value) }}
           onChange = { (e, value) => { updateLocation(value) }}
@@ -87,6 +90,10 @@ const SearchBox = styled(Autocomplete)`
   outline: none !important;
   border: none !important;
 
+  .MuiFormControl-root {
+    background-color: ${props => props.themeIsDark ? "#dcdcdc" : "#fff"} ;
+  }
+
   .MuiInputLabel-outlined {
     z-index: 1;
     transform: translate(10px, 11px) scale(1);
@@ -95,7 +102,7 @@ const SearchBox = styled(Autocomplete)`
 
   label#combo-box-demo-label {
     color: #003c7d;
-    background-color: #ffffff;
+    background-color: ${props => props.themeIsDark ? "#dcdcdc" : "#fff"} ;
     padding: 10px;
     border-radius: 0.5rem;
     outline: none;
