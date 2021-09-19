@@ -46,7 +46,6 @@ const SearchInput = () => {
     }
   },[response]);
 
-
   // Updates the location objects when choosing a new city in search field:
   const updateLocation = (value) => {
     if (value?.locationCity && value?.locationCountry && value?.locationKey) {
@@ -55,7 +54,7 @@ const SearchInput = () => {
   }
 
   return (
-     <SearchInputDiv>
+     <SearchInputDiv themeIsDark = {themeIsDark}>
         <SearchBox
           themeIsDark = {themeIsDark}
           getOptionSelected ={(option, value) => option.locationDisplay === value.locationDisplay}
@@ -73,8 +72,7 @@ const SearchInput = () => {
 export default SearchInput;
 
 const SearchInputDiv = styled.div`
-  /* background-color: #003c7d; */
-  background-color: #214163;
+  background-color: ${props => props.themeIsDark ? "#214163" : props.theme.color}; 
   color: #ffffff;
   width: 100%;
   margin: auto;
@@ -82,15 +80,13 @@ const SearchInputDiv = styled.div`
 `;
 
 const SearchBox = styled(Autocomplete)`
-  background-color: #ffffff;
-  color: #003c7d;
   width: 400px !important;
   margin: auto;
   outline: none !important;
   border: none !important;
 
   .MuiFormControl-root {
-    background-color: ${props => props.themeIsDark ? "#dcdcdc" : "#fff"} ;
+    background-color: ${props => props.themeIsDark ? "#d6dbef" : "#fff"} ;
   }
 
   .MuiFormControl-root fieldset {
@@ -105,7 +101,7 @@ const SearchBox = styled(Autocomplete)`
 
   label#combo-box-demo-label {
     color: #003c7d;
-    background-color: ${props => props.themeIsDark ? "#dcdcdc" : "#fff"} ;
+    background-color: ${props => props.themeIsDark ? "#d6dbef" : "#fff"} ;
     padding: 10px;
     border-radius: 0.5rem;
     outline: none;

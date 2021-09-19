@@ -11,11 +11,13 @@ const ForecastDayCard = (props) => {
   
   return (
     <ForecastDayCardDiv>
-      <div>
-        {day}
-      </div>
-      <div className="second-date">
-        ({date + "-" + month})
+      <div className="date-card">
+        <div className="primary-date">
+          {day}
+        </div>
+        <div className="second-date">
+          ({date + " " + month})
+        </div>
       </div>
       <div>
         {  data.Day.IconPhrase  } 
@@ -37,6 +39,14 @@ const ForecastDayCardDiv = styled.div`
   min-height: 150px;
   padding: 10px;
   font-weight: 600;
+
+  .date-card {
+    background-color: ${(props) => props.theme.color};
+    color: ${(props) => props.theme.backgroundColor};
+    padding: 10px;
+    margin: -10px;
+    margin-bottom: 20px;
+  }
 
   .second-date {
     font-weight: 400;
