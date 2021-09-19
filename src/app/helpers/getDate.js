@@ -14,5 +14,5 @@ export const getFormattedDate = (dateString) => {
   // month
   let month =   months[d.getMonth()];
 
-  return `${day} (${date} ${month})`;
+  return {day, date, month};
 }

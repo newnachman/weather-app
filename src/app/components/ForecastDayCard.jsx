@@ -7,11 +7,15 @@ import { getFormattedDate } from '../helpers/getDate';
 const ForecastDayCard = (props) => {
 
   const {data} = props;
+  const {day, date, month} = getFormattedDate(data.Date);
   
   return (
     <ForecastDayCardDiv>
       <div>
-        {  getFormattedDate(data.Date)  } 
+        {day}
+      </div>
+      <div className="second-date">
+        ({date + "-" + month})
       </div>
       <div>
         {  data.Day.IconPhrase  } 
@@ -33,4 +37,9 @@ const ForecastDayCardDiv = styled.div`
   min-height: 150px;
   padding: 10px;
   font-weight: 600;
+
+  .second-date {
+    font-weight: 400;
+    margin: 5px;
+  }
 `
