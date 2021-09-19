@@ -7,18 +7,19 @@ export const useFetch = () => {
   // States for controlling fetch details:
 	const [url, setUrl] = useState(null);
 	const [method, setMethod] = useState(null);
-	const [fetchedData, setFetchedData] = useState(null);
+	const [data, setData] = useState(null);
+	const [localDetail, setLocalDetail] = useState(null);
 
   // Response data:
   const [response, setResponse] = useState({data: null, loading: false, error: null});
 
+  // Function for triggering useEffect by changing state (activating the fetch):
   const fetchData = useCallback(
     (fetchDetail, fetchedUrl, fetchedMethod = "GET", fetchedData = null) => {
-      // Function for triggering useEffect by changing state (activate fetch):
-      console.log('[ Fetch Detail: ', fetchDetail, ' ] url: ', fetchedUrl, ' method: ', fetchedMethod, 'data: ',  fetchedData);
+      setLocalDetail?.(fetchDetail);
       setUrl(fetchedUrl);
       setMethod(fetchedMethod);
-      setFetchedData(fetchedData);
+      setData(fetchedData);
     },
     [],
   )
@@ -27,19 +28,19 @@ export const useFetch = () => {
 
     if (!url) { return; }
     setResponse(state => ({data: state.data, loading: true, error: null}));
+    console.log('[ Fetch Detail: ', localDetail, ' ] url: ', url, ' method: ', method, 'data: ',  data);
 
     axios.request({
         method: method,
         url: url,
-        data: fetchedData
+        data: data
       }).then((result) => {
          setResponse({data: result.data, loading: false, error: null});
-         console.log('result.data of useFetch request: ', result.data);
       }).catch(error => {
         setResponse({data: null, loading: false, error: error});
         console.log('response error of useFetch request: ', error);
     });
-  }, [url, method, fetchedData])
+  }, [url, method, data, localDetail])
   
 	return { response, fetchData }
 }

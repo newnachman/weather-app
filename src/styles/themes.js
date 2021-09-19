@@ -4,6 +4,6 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
-  backgroundColor: "#01254c", 
+  backgroundColor: "#001d3c", 
   color: "#dcdcdc",
 };

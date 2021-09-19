@@ -9,33 +9,20 @@ body {
   color: ${props => props.theme.color};
 }
 
-.MODE_DARK {
-  background-color: #01254c;
-  color: white;
-}
-
-.MODE_LIGHT {
-  background-color: white;
-  color: #003c7d;
-}
-
 div {
   box-sizing: border-box;
 }
 
-nav {
+/* nav {
   background-color: white;
   border-bottom: 1px solid #8f8f92;
-}
-
-.menu-btn-wrp {
-  display: none;
-}
-
-nav {
   height: 90px;
   background-color: white;
-    border-bottom: 1px solid #8f8f92;
+  border-bottom: 1px solid #8f8f92;
+} */
+/* 
+.menu-btn-wrp {
+  display: none;
 }
 
 nav a.logo span {
@@ -70,11 +57,11 @@ nav a.logo {
 nav ul {
   float: right;
   margin-right: 20px;
-}
-
+} */
+/* 
 fieldset {
   display: none !important;
-}
+} */
 
 @media screen and (max-width: 600px){
 

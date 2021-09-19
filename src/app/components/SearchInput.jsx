@@ -22,7 +22,6 @@ const SearchInput = () => {
 
   useEffect(() => {
     let currentLoc = createCurrentLocationFromParam(id);
-    console.log('currentLoc', currentLoc)
      dispatch(setCurrentLocation(currentLoc));
      dispatch(changeTemperatureMode(defaultTemperatureMode));
   }, [dispatch, id]);
@@ -63,7 +62,7 @@ const SearchInput = () => {
           onInputChange = { (e) => { setSearchWord(e.target.value) }}
           onChange = { (e, value) => { updateLocation(value) }}
           id="combo-box-demo"
-          options={cities}
+          options={cities || []}
           getOptionLabel={(option) => option.locationDisplay}
           renderInput={(params) => <TextField {...params} label="search city" variant="outlined" />}
         />
@@ -92,6 +91,10 @@ const SearchBox = styled(Autocomplete)`
 
   .MuiFormControl-root {
     background-color: ${props => props.themeIsDark ? "#dcdcdc" : "#fff"} ;
+  }
+
+  .MuiFormControl-root fieldset {
+    display: none;
   }
 
   .MuiInputLabel-outlined {

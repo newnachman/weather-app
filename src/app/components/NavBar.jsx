@@ -3,9 +3,10 @@ import { useDispatch } from 'react-redux';
 import { changeTemperatureMode, changeThemeMode } from './../redux/Actions';
 import { useSelector } from 'react-redux';
 import { constants } from '../constants/constants';
+import styled from 'styled-components';
 
 const Navbar = () => {
-// THEME_MODE
+
   const themeIsDark = useSelector(state => state.themeIsDark);
   const temperatureMode = useSelector(state => state.temperatureMode);
   const [isFahrenheit, setIsFahrenheit] = useState();
@@ -35,7 +36,7 @@ const Navbar = () => {
   }
 
   return (
-     <nav>
+     <AppNav>
        <a href="/" className="logo" tabIndex="1">
         <span>weather app</span>
        </a>
@@ -63,8 +64,122 @@ const Navbar = () => {
            {isFahrenheit ? "GO CELSIUS" : "GO FAHRENHEIT"}
          </li>
        </ul>
-     </nav>
+     </AppNav>
   )
 }
 
-export default Navbar
+export default Navbar;
+
+const AppNav = styled.nav`
+  height: 90px;
+  /* background-color: white;
+  border-bottom: 1px solid #8f8f92; */
+  
+  .menu-btn-wrp {
+    display: none;
+  }
+
+  a.logo span {
+    text-transform: uppercase;
+    font-size: 2rem;
+    color: #ff5e2b;
+    text-decoration: none;
+    text-shadow: 5px 3px 3px rgb(192 190 190 / 56%);
+  }
+
+  ul li {
+    display: inline-block;
+    margin: 10px;
+  }
+
+  ul li a {
+    color: ${props => props.theme.color};
+    font-size: 25px;
+    text-decoration: none;
+  }
+
+  a.logo {
+    position: absolute;
+    left: 3%;
+    top: 30px;
+    text-align: left;
+    z-index: 10;
+    text-decoration: none;
+  }
+
+  ul {
+    float: right;
+    margin-right: 20px;
+  }
+
+  @media screen and (max-width: 600px){
+
+    a.logo span {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .menu-btn-wrp {
+      display: block;
+      position: absolute;
+      padding: 0;
+      z-index: 9999;
+      font-size: 25px;
+      color: #ff5e2b;
+      top: 2%;
+      right: 0;
+      width: 200px;
+      border: none;
+      outline: none;
+    }
+
+    .menu-arrow {
+      display: inline-block;
+    }
+    .menu-arrow i {
+      margin-left: 10px;
+    }
+
+    .menu-toggler {
+      display: inline-block;
+      position: absolute;
+      margin-left: 20px;
+      padding: 0;
+      z-index: 9999;
+      background-color: #fff;
+      font-size: 25px;
+      color: #ff5e2b;
+      outline: none;
+      border: none;
+    }
+
+    ul {
+      margin-right: 0;
+      float: unset;
+      position: absolute;
+      right: 0;
+      top: 70px;
+      width: 100%;
+      height: 0;
+      transition: 1s all;
+      padding: 0;
+      z-index: 99999;
+      overflow: hidden;
+    }
+
+    ul.display{
+      height: 370px;
+      background-color: white;
+    }
+
+    ul li {
+      display: block;
+      /* height: 0; */
+      background-color: white;
+      width: 100%;
+      border-bottom: 2px solid #e637671c;
+    }
+
+  }
+
+`;
