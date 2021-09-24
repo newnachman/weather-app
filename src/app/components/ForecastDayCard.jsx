@@ -11,7 +11,8 @@ const ForecastDayCard = (props) => {
   
   return (
     <ForecastDayCardDiv>
-      <div className="date-card">
+      
+      <div className="card-header">
         <div className="primary-date">
           {day}
         </div>
@@ -19,15 +20,18 @@ const ForecastDayCard = (props) => {
           ({date + " " + month})
         </div>
       </div>
-      <div>
-        {  data.Day.IconPhrase  } 
-      </div>
-      <div>
-        <img src={getWeatherIconUrl(data.Day.Icon)} alt="data.Day.IconPhrase" />
-      </div>
-      <div>
-        {  data.Temperature.Maximum.Value  }  -  {  data.Temperature.Minimum.Value  }
-      </div>
+
+      <div className="main-card">
+        <div>
+          {  data.Day.IconPhrase  } 
+        </div>
+        <div>
+          <img src={getWeatherIconUrl(data.Day.Icon)} alt={data.Day.IconPhrase} />
+        </div>
+        <div>
+          {  data.Temperature.Maximum.Value  }  -  {  data.Temperature.Minimum.Value  }
+        </div>
+      </div>  
     </ForecastDayCardDiv>
   )
 }
@@ -40,7 +44,7 @@ const ForecastDayCardDiv = styled.div`
   padding: 10px;
   font-weight: 600;
 
-  .date-card {
+  .card-header {
     background-color: ${(props) => props.theme.color};
     color: ${(props) => props.theme.backgroundColor};
     padding: 10px;

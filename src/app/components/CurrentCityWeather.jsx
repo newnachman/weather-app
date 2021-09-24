@@ -8,7 +8,7 @@ import Grow from '@material-ui/core/Grow';
 const CurrentCityWeather = () => {
   const { response, fetchData } = useFetch();
   const currentLocation = useSelector(state => state.currentLocation)
-  const temperatureMode = useSelector(state => state.temperatureMode)
+  const temperatureMode = useSelector(state => state.temperatureMode);
   const [currentWeather, setCurrentWeather] = useState();
   // const temperatureMode = {mode: defaultTemperatureMode.mode, name: defaultTemperatureMode.name};
 

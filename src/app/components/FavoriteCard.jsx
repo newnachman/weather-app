@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import Grow from '@material-ui/core/Grow';
 import { getWeatherIconUrl } from './../api/accuweather';
+import { useSelector } from 'react-redux';
 
 const FavoriteCard = (props) => {
   const {data, itemKey} = props;
   const history = useHistory();
-
+  const temperatureMode = useSelector(state => state.temperatureMode);
   // redirect user to the specific city main page:
   const goMainWithCurrentCity = (id) => {
     history.push(`/main/${id}`);
@@ -16,48 +17,31 @@ const FavoriteCard = (props) => {
   console.log(data)
 
   return (
-    // <>
-    // {currentWeather &&  
-    //   <Grow in={data ? true : false}>
-    //   <CurrentCityDiv>
-    //     <div>
-    //       <div className="city-name">{currentLocation.city}</div>
-    //     </div>
-    //     <div>
-    //       <img src={getWeatherIconUrl(currentWeather.WeatherIcon)} alt="" />
-    //     </div>
-    //     <div>
-    //       <div className="weather-value">
-    //         {`${currentWeather.Temperature['Metric'].Value}`}
-    //         <div className="temperature-mode">{currentWeather.Temperature['Metric'].Unit}</div>
-    //       </div>
-    //       <div className="weather-text">
-    //         {`(${currentWeather.WeatherText})`}
-    //       </div>
-          
-    //     </div>
-    //   </CurrentCityDiv>
-    //   </Grow>
-    // }
-    // </>
     <Grow in={data ? true : false} style={{ transformOrigin: '0 0 0' }} {...(data ? { timeout: (1000 * (itemKey + 1))} : {})}>
       <FavoriteCardDiv onClick={()=> {goMainWithCurrentCity(`${data.city}::${data.country}::${data.key}`)}}>
-        <div className="city">
-          {data.city}
+
+        <div className="card-header">
+          <div className="city">
+            {data.city}
+          </div>
+          <div className="country">
+            ({data.country})
+          </div>
         </div>
-        <div className="country">
-          ({data.country})
-        </div>
-        <div>
-          <img src={getWeatherIconUrl(data.detail.WeatherIcon)} alt={data.detail.WeatherText} />
-        </div>
-        <div>
-          {data.detail.WeatherText}
-        </div>
-        <div className="weather-value">
-          {`${data.detail.Temperature['Metric'].Value}`}
-          <div className="temperature-mode">{data.detail.Temperature['Metric'].Unit}</div>
-        </div>
+
+        <div className="main-card" >
+          <div>
+            {data.detail.WeatherText}
+          </div>
+          <div>
+            <img src={getWeatherIconUrl(data.detail.WeatherIcon)} alt={data.detail.WeatherText} />
+          </div>
+          <div className="weather-value" title={temperatureMode.name}>
+            {`${data.detail.Temperature[temperatureMode.mode].Value}`}
+            <div className="temperature-mode">{data.detail.Temperature[temperatureMode.mode].Unit}</div>
+          </div>
+        </div>  
+
       </FavoriteCardDiv>
     </Grow>
 
@@ -71,10 +55,28 @@ const FavoriteCardDiv = styled.div`
   cursor: pointer;
   border: 1px solid grey;
   min-height: 150px;
-  padding-top: 20px;
   font-weight: 600;
+  
+  .card-header {
+    background-color: ${(props) => props.theme.color};
+    color: ${(props) => props.theme.backgroundColor};
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+  .weather-value {
+    position: relative;
+    width: fit-content;
+    text-align: center;
+    margin: 10px auto;
+  }
+
+  .weather-value .temperature-mode {
+    position: absolute;
+    top: -10px;
+    right: -12px;
+    font-size: 0.8rem;
+    color: #ff5e2b;
+  }
 `;
 
-
-// style={{ transformOrigin: '0 0 0' }}
-// {...(checked ? { timeout: 1000 } : {})}

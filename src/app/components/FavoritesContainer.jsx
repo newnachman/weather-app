@@ -6,9 +6,21 @@ import axios from 'axios';
 import FavoriteCard from './FavoriteCard';
 
 const FavoritesContainer = () => {
+
+  
   
   const favoritesArray = useSelector(state => state.favoritesArray);
   const [favoritesData, setFavoritesData] = useState([]);
+
+  if ("geolocation" in navigator) {
+    console.log(" ------geolocation: Available");
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
+  } else {
+    console.log(" ------geolocation: Not Available");
+  }
 
   useEffect(() => {
     if (favoritesArray?.length > 0) {
@@ -50,7 +62,7 @@ export default FavoritesContainer;
 
 
 const FavoritesTitle = styled.h2`
-color: #003c7d;
+
 `;
 
 const FavoritesCardWrapper = styled.div`
