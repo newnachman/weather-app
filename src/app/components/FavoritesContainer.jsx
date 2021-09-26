@@ -1,26 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
-import {getCurrentWeatherUrl, getWeatherIconUrl} from '../api/accuweather';
+import {getCurrentWeatherUrl} from '../api/accuweather';
 import styled from 'styled-components';
 import axios from 'axios';
 import FavoriteCard from './FavoriteCard';
 
 const FavoritesContainer = () => {
-
-  
   
   const favoritesArray = useSelector(state => state.favoritesArray);
   const [favoritesData, setFavoritesData] = useState([]);
-
-  if ("geolocation" in navigator) {
-    console.log(" ------geolocation: Available");
-    navigator.geolocation.getCurrentPosition(function(position) {
-      console.log("Latitude is :", position.coords.latitude);
-      console.log("Longitude is :", position.coords.longitude);
-    });
-  } else {
-    console.log(" ------geolocation: Not Available");
-  }
 
   useEffect(() => {
     if (favoritesArray?.length > 0) {

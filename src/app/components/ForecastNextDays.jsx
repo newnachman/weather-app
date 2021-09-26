@@ -17,7 +17,8 @@ const ForecastNextDays = () => {
 
   useEffect(() => {
     if (currentLocation?.key && temperatureMode?.name) {
-      fetchData( 'FORECAST_WEATHER', getForecastWeatherUrl(currentLocation.key, (temperatureMode.name === constants.TEMPERATURE_MODE.CELSIUS.name)));
+      let isCelsius = (temperatureMode.name === constants.TEMPERATURE_MODE.CELSIUS.name);
+      fetchData( 'FORECAST_WEATHER', getForecastWeatherUrl(currentLocation.key, isCelsius));
     }
   }, [currentLocation?.key, fetchData, temperatureMode?.name]);
   

@@ -6,33 +6,16 @@ import { useFetch } from '../hooks/useFetch';
 import {getCitiesAutocompleteUrl} from '../api/accuweather';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { defaultLocation, defaultTemperatureMode } from '../api/accuweather';
-import { setCurrentLocation, changeTemperatureMode } from './../redux/Actions';
-import { useParams } from 'react-router-dom';
-import { createLocationsObjects } from '../helpers/createLocationObjects';
+import { setCurrentLocation } from './../redux/Actions';
+import { createSearchLocationsObjects } from '../helpers/createLocations';
 
 const SearchInput = () => {
 
-  const { id } = useParams();
   const themeIsDark = useSelector(state => state.themeIsDark);
   const { response, fetchData } = useFetch();
   const [cities, setCities] = React.useState([]);
   const [searchWord, setSearchWord] = React.useState('');
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    let currentLoc = createCurrentLocationFromParam(id);
-     dispatch(setCurrentLocation(currentLoc));
-     dispatch(changeTemperatureMode(defaultTemperatureMode));
-  }, [dispatch, id]);
-
-  const createCurrentLocationFromParam = (param) => {
-    if (!param || !param.includes("::")) {
-      return defaultLocation;
-    } 
-    let paramArray = param.split("::");
-    return {city: paramArray[0], country: paramArray[1], key: paramArray[2]};
-  }
 
   useEffect(()=>{
     if (searchWord) {
@@ -42,7 +25,7 @@ const SearchInput = () => {
 
   useEffect(() => {
     if (!response?.loading && response?.data ) {
-      setCities(createLocationsObjects(response.data));
+      setCities(createSearchLocationsObjects(response.data));
     }
   },[response]);
 

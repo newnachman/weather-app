@@ -8,26 +8,36 @@ export const defaultTemperatureMode = {mode: 'Metric', name: 'Celsius', unit: 'C
 
 
 // Api key:
-export const accuweatherApiKey = '?apikey=' + process.env.REACT_APP_ACCUWEATHER_API_KEY;
+const accuweatherApiKey = '?apikey=' + process.env.REACT_APP_ACCUWEATHER_API_KEY;
+
+// Base url:
+const accuweatherBaseUrl = 'http://dataservice.accuweather.com/';
+
 
 
 // Creating dynamic URLs for fetching Api:
 export const getCurrentWeatherUrl = (locationKey) => {
-    if (!locationKey) {
-        return false;
-    }
-    return 'http://dataservice.accuweather.com/currentconditions/v1/' + locationKey + accuweatherApiKey;
+    if (!locationKey) {  return false;  }
+    return accuweatherBaseUrl + 'currentconditions/v1/' + locationKey + accuweatherApiKey;
 }
 
-export const getForecastWeatherUrl = (locationKey, isMetric) => {
-    return 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/' + locationKey + accuweatherApiKey + '&metric=' + isMetric;
+export const getForecastWeatherUrl = (locationKey, isCelsius) => { 
+    if (!locationKey) {  return false;  }
+    return accuweatherBaseUrl + 'forecasts/v1/daily/5day/' + locationKey + accuweatherApiKey + '&metric=' + isCelsius;
 }
 
 export const getCitiesAutocompleteUrl = (searchKey) => {
-    return 'http://dataservice.accuweather.com/locations/v1/cities/autocomplete' + accuweatherApiKey + '&q=' + searchKey;
+    if (!searchKey) {  return false;  }
+    return accuweatherBaseUrl + 'locations/v1/cities/autocomplete' + accuweatherApiKey + '&q=' + searchKey;
+}
+
+export const getLocationKeyByPositionUrl = (lat, lon) => {
+    if (!lat || !lon) {  return false;  }
+    return accuweatherBaseUrl + 'locations/v1/cities/geoposition/search' + accuweatherApiKey + '&q=' + lat + '%2C' + lon;
 }
 
 export const getWeatherIconUrl = (iconNumber) => {
+    if (!iconNumber) {  return false;  }
     // string of image number in api endpoint is always two-digit-number
     if (iconNumber < 10) {
         iconNumber = '0' + iconNumber;
