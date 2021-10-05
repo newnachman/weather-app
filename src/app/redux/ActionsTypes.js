@@ -5,6 +5,7 @@
   FAVORITE_REMOVE:              "FAVORITE_REMOVE",
   THEME_MODE:                   "THEME_MODE",
   TEMPERATURE_MODE:             "TEMPERATURE_MODE",
+  SET_SNACKBAR:             "SET_SNACKBAR",
 }
 
 export default ActionsTypes;

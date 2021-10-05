@@ -26,13 +26,15 @@ const Main = () => {
 
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function(position) {
-        setDetectedCoordinates({latitude: position.coords.latitude, longitude: position.coords.longitude})
+        setDetectedCoordinates({status: "SUCCESS", latitude: position.coords.latitude, longitude: position.coords.longitude})
       });
+    } else {
+      setDetectedCoordinates({status: "FAILED", })
     }
   }, [dispatch])
 
   useEffect(() => {
-    if (detectedCoordinates?.latitude && detectedCoordinates?.longitude) {
+    if (detectedCoordinates?.status === "SUCCESS") {
       fetchData('GET_KEY_BY_LOCATION', getLocationKeyByPositionUrl(detectedCoordinates.latitude, detectedCoordinates.longitude));
     }
   }, [fetchData, detectedCoordinates]);
@@ -47,9 +49,11 @@ const Main = () => {
   },[response])
 
   useEffect(() => {
-     let currentLoc = createCurrentLocation(detectedLocation, defaultLocation, id);
-     dispatch(setCurrentLocation(currentLoc));
-  }, [dispatch, id, detectedLocation]);
+     if (detectedCoordinates?.status === "FAILED" || detectedLocation) {
+      let currentLoc = createCurrentLocation(detectedLocation, defaultLocation, id);
+      dispatch(setCurrentLocation(currentLoc));
+     }
+  }, [dispatch, id, detectedLocation, detectedCoordinates]);
 
 
   return (

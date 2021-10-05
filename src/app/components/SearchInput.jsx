@@ -6,7 +6,7 @@ import { useFetch } from '../hooks/useFetch';
 import {getCitiesAutocompleteUrl} from '../api/accuweather';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { setCurrentLocation } from './../redux/Actions';
+import { setCurrentLocation, setSnackbar } from './../redux/Actions';
 import { createSearchLocationsObjects } from '../helpers/createLocations';
 
 const SearchInput = () => {
@@ -29,6 +29,17 @@ const SearchInput = () => {
     }
   },[response]);
 
+  const searchInputChange = (value) => {
+    let allowedChars = /^[A-Za-z]+$/;
+    if (value === '' || value.match(allowedChars)) {
+      setSearchWord(value)
+    }else{
+      // set here a dialog to explain only english chars are allowed
+      dispatch(setSnackbar({display: true, message: "Please insert only English (a-z, A-Z) in search field", type: "warning"}));
+      return false;
+    }
+  }
+
   // Updates the location objects when choosing a new city in search field:
   const updateLocation = (value) => {
     if (value?.locationCity && value?.locationCountry && value?.locationKey) {
@@ -41,7 +52,8 @@ const SearchInput = () => {
         <SearchBox
           themeIsDark = {themeIsDark}
           getOptionSelected ={(option, value) => option.locationDisplay === value.locationDisplay}
-          onInputChange = { (e) => { setSearchWord(e.target.value) }}
+          onInputChange = { (e) => { searchInputChange(e.target.value) }}
+          inputValue = {searchWord}
           onChange = { (e, value) => { updateLocation(value) }}
           id="combo-box-demo"
           options={cities || []}

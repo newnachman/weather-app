@@ -24,5 +24,10 @@ import ActionsTypes from './ActionsTypes';
     type: ActionsTypes.TEMPERATURE_MODE,
     temperatureMode
   })
+
+  export const setSnackbar = (newSnackbarState) => ({                   
+    type: ActionsTypes.SET_SNACKBAR,
+    newSnackbarState
+  })
   
   

@@ -19,6 +19,9 @@ export const reducer = (state = InitialState, action) => {
     case ActionsTypes.TEMPERATURE_MODE:
       return {...state, temperatureMode: action.temperatureMode }; 
 
+    case ActionsTypes.SET_SNACKBAR:
+      return {...state, snackbarState: action.newSnackbarState }; 
+
     default:
       return state;
   }
