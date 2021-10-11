@@ -4,13 +4,15 @@ import { useSelector } from 'react-redux';
 import { useFetch } from '../hooks/useFetch';
 import {getCurrentWeatherUrl, getWeatherIconUrl} from '../api/accuweather';
 import Grow from '@material-ui/core/Grow';
+import { useDispatch } from 'react-redux';
+import { setSnackbar } from './../redux/Actions';
 
 const CurrentCityWeather = () => {
   const { response, fetchData } = useFetch();
   const currentLocation = useSelector(state => state.currentLocation)
   const temperatureMode = useSelector(state => state.temperatureMode);
   const [currentWeather, setCurrentWeather] = useState();
-  // const temperatureMode = {mode: defaultTemperatureMode.mode, name: defaultTemperatureMode.name};
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (currentLocation?.key) {
@@ -19,6 +21,10 @@ const CurrentCityWeather = () => {
   }, [currentLocation?.key, fetchData]);
   
   useEffect(() => {
+    if (response.error) {
+      dispatch(setSnackbar({display: true, message: `There was a problem retrieving data in: ${response.data} please try later or contact us if the problem persists`, type: "error"}));
+      return;
+    }
     if (response.data && !response.loading) {
       setCurrentWeather(response.data[0]);
     }

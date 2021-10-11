@@ -24,17 +24,25 @@ const SearchInput = () => {
   },[searchWord, fetchData]);
 
   useEffect(() => {
+    if (response.error) {
+      dispatch(setSnackbar({display: true, message: `There was a problem retrieving data in: ${response.data} please try later or contact us if the problem persists`, type: "error"}));
+      return;
+    }
     if (!response?.loading && response?.data ) {
       setCities(createSearchLocationsObjects(response.data));
     }
-  },[response]);
-
+  },[response, dispatch]);
+  
   const searchInputChange = (value) => {
     let allowedChars = /^[A-Za-z]+$/;
-    if (value === '' || value.match(allowedChars)) {
+    if (typeof value !== "string") {
+      return false;
+    }
+    if (value === '') {
+      setSearchWord(value)
+    }else if (value.match(allowedChars)) {
       setSearchWord(value)
     }else{
-      // set here a dialog to explain only english chars are allowed
       dispatch(setSnackbar({display: true, message: "Please insert only English (a-z, A-Z) in search field", type: "warning"}));
       return false;
     }
@@ -42,6 +50,7 @@ const SearchInput = () => {
 
   // Updates the location objects when choosing a new city in search field:
   const updateLocation = (value) => {
+    setSearchWord('');
     if (value?.locationCity && value?.locationCountry && value?.locationKey) {
       dispatch(setCurrentLocation({city: value.locationCity, country: value.locationCountry, key: value.locationKey}));
     }
@@ -52,9 +61,9 @@ const SearchInput = () => {
         <SearchBox
           themeIsDark = {themeIsDark}
           getOptionSelected ={(option, value) => option.locationDisplay === value.locationDisplay}
-          onInputChange = { (e) => { searchInputChange(e.target.value) }}
+          onInputChange = { (e) => { e && searchInputChange(e.target.value); }}
           inputValue = {searchWord}
-          onChange = { (e, value) => { updateLocation(value) }}
+          onChange = { (e, value) => { updateLocation(value); }}
           id="combo-box-demo"
           options={cities || []}
           getOptionLabel={(option) => option.locationDisplay}

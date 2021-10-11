@@ -5,7 +5,8 @@ import { useFetch } from '../hooks/useFetch';
 import { useSelector } from 'react-redux';
 import { getForecastWeatherUrl } from '../api/accuweather';
 import { constants } from '../constants/constants';
-
+import { useDispatch } from 'react-redux';
+import { setSnackbar } from './../redux/Actions';
 
 const ForecastNextDays = () => {
 
@@ -13,7 +14,7 @@ const ForecastNextDays = () => {
   const currentLocation = useSelector(state => state.currentLocation)
   const temperatureMode = useSelector(state => state.temperatureMode)
   const [forecastWeather, setForecastWeather] = useState();
-
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (currentLocation?.key && temperatureMode?.name) {
@@ -23,10 +24,14 @@ const ForecastNextDays = () => {
   }, [currentLocation?.key, fetchData, temperatureMode?.name]);
   
   useEffect(() => {
+    if (response.error) {
+      dispatch(setSnackbar({display: true, message: `There was a problem retrieving data in: ${response.data} please try later or contact us if the problem persists`, type: "error"}));
+      return;
+    }
     if (response.data && !response.loading) {
       setForecastWeather(response.data);
     }
-  },[response])
+  },[response, dispatch])
 
 
   return ( forecastWeather ?

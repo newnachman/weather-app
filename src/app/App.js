@@ -19,7 +19,7 @@ const App = () => {
   const snackbarState = useSelector(state => state.snackbarState);
   const dispatch = useDispatch();
   const handleClose = () => {
-    dispatch(setSnackbar({display: false, ...snackbarState}));
+    dispatch(setSnackbar({display: false, message: "", type: ""}));
   }
 
   return (
@@ -36,7 +36,7 @@ const App = () => {
           </Switch>
         </Router>
         {snackbarState &&
-        <Snackbar open={snackbarState.display} autoHideDuration={6000} onClose={handleClose}>
+        <Snackbar open={snackbarState.display} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
           <Alert onClose={handleClose} severity={snackbarState.type} sx={{ width: '100%' }}>
             {snackbarState.message}
           </Alert>

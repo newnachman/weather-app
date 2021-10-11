@@ -37,7 +37,7 @@ export const useFetch = () => {
       }).then((result) => {
          setResponse({data: result.data, loading: false, error: null});
       }).catch(error => {
-        setResponse({data: null, loading: false, error: error});
+        setResponse({data: localDetail, loading: false, error: error});
         console.log('response error of useFetch request: ', error);
     });
   }, [url, method, data, localDetail])

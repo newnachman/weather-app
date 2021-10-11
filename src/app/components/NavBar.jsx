@@ -4,6 +4,8 @@ import { changeTemperatureMode, changeThemeMode } from './../redux/Actions';
 import { useSelector } from 'react-redux';
 import { constants } from '../constants/constants';
 import styled from 'styled-components';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
 
 const Navbar = () => {
 
@@ -57,11 +59,35 @@ const Navbar = () => {
          <li>
            <a tabIndex="4" href="/favorites">FAVORITES</a>
          </li>
-         <li onClick={toggleTheme}>
-           {themeIsDark ? "GO LIGHT MODE" : "GO DARK MODE"}
+         <li onClick={toggleTheme}>      
+          <IconWrapper positionTop="150px">
+           {themeIsDark ? 
+              <>
+              <LightModeOutlinedIcon fontSize='large'/>
+              <label>Go light mode</label>
+              </>
+            : 
+              <>
+              <Brightness4Icon fontSize='large'/>
+              <label>Go dark mode</label>
+              </>
+            }
+          </IconWrapper> 
          </li>
          <li onClick={toggleTemperatureMode}>
-           {isFahrenheit ? "GO CELSIUS" : "GO FAHRENHEIT"}
+          <IconWrapper positionTop="270px">
+            {isFahrenheit ? 
+                <>
+                <div className="weather-circle">C</div>
+                <label>Go Celsius</label>
+                </>
+              : 
+                <>
+                <div className="weather-circle">F</div>
+                <label>Go Fahrenheit</label>
+                </>
+              }
+            </IconWrapper> 
          </li>
        </ul>
      </AppNav>
@@ -182,4 +208,33 @@ const AppNav = styled.nav`
 
   }
 
+`;
+
+const IconWrapper = styled.div`
+    position: absolute;
+    top: ${(props) => props.positionTop};
+    right: 50px;
+    height: 100px;
+    text-align: center;
+    max-width: 90px;
+    box-shadow: -2px 2px 4px 0px #000f1efa;
+    padding: 14px;
+    border-radius: 0.3rem;
+    border: 1px solid ${(props) => props.theme.color};
+
+    label {
+      font-size: 15px;
+      display: block;
+      margin-top: 5px;
+    }
+
+    .weather-circle {
+      border-radius: 50%;
+      padding: 7px;
+      width: 30px;
+      height: 30px;
+      margin: auto;
+      background-color: ${(props) => props.theme.color};
+      color: ${(props) => props.theme.backgroundColor};
+    }
 `;

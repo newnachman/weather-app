@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { useDispatch } from 'react-redux';
 import { defaultLocation, defaultTemperatureMode, getLocationKeyByPositionUrl } from '../api/accuweather';
-import { setCurrentLocation, changeTemperatureMode } from './../redux/Actions';
+import { setCurrentLocation, changeTemperatureMode, setSnackbar } from './../redux/Actions';
 import { useParams } from 'react-router-dom';
 import { createCurrentLocation } from '../helpers/createLocations';
 import { useFetch } from '../hooks/useFetch';
@@ -40,13 +40,17 @@ const Main = () => {
   }, [fetchData, detectedCoordinates]);
 
   useEffect(() => {
+    if (response.error) {
+      dispatch(setSnackbar({display: true, message: `There was a problem retrieving data in: ${response.data} please try later or contact us if the problem persists`, type: "error"}));
+      return;
+    }
     if (response.data && !response.loading) {
       setDetectedLocation( {
         city: response.data.LocalizedName, 
         country: response.data.Country.LocalizedName, 
         key: response.data.Key})
     }
-  },[response])
+  },[response, dispatch])
 
   useEffect(() => {
      if (detectedCoordinates?.status === "FAILED" || detectedLocation) {

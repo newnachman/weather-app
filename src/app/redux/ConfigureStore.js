@@ -3,7 +3,7 @@ import {reducer} from './Reducer';
 import { save, load } from "redux-localstorage-simple";
 import InitialState from './InitialState';
 
-const createStoreWithMiddleware = applyMiddleware( save() )(createStore);
+const createStoreWithMiddleware = applyMiddleware( save({ ignoreStates: ["snackbarState"] }) )(createStore);
 
 const store = createStoreWithMiddleware( reducer, load({preloadedState: InitialState}) );   
 

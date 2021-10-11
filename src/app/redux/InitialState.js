@@ -4,7 +4,7 @@ const InitialState = {
     favoritesArray: [],
     themeIsDark: false,
     temperatureMode: {},
-    snackbarState: {display: false, message: "", type: "warning"},
+    snackbarState: {display: false, message: "", type: ""},
 }
 
 export default InitialState;
