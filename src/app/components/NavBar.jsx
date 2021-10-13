@@ -41,6 +41,7 @@ const Navbar = () => {
      <AppNav>
        <a href="/" className="logo" tabIndex="1">
         <span>weather app</span>
+        <img src="/logo-weather.png" alt="" />
        </a>
        <div className="menu-btn-wrp">
          <div className="menu-arrow">
@@ -111,6 +112,14 @@ const AppNav = styled.nav`
     color: #ff5e2b;
     text-decoration: none;
     text-shadow: 5px 3px 3px rgb(192 190 190 / 56%);
+  }
+
+  a.logo img {
+    max-width: 50px;
+    transform: rotate(10deg);
+    position: absolute;
+    top: -15px;
+    right: -60px;
   }
 
   ul li {
