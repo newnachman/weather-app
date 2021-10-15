@@ -84,7 +84,7 @@ const SearchInputDiv = styled.div`
 `;
 
 const SearchBox = styled(Autocomplete)`
-  width: 400px !important;
+  max-width: 600px !important;
   margin: auto;
   outline: none !important;
   border: none !important;

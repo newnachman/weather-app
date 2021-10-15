@@ -21,4 +21,8 @@ const MainWeatherDiv = styled.div`
   border: 1px solid grey;
   padding: 40px;
   margin: 30px 0;
+
+  @media screen and (max-width: 1100px){
+    padding: 20px;
+  }
 `;

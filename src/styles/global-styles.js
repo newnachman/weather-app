@@ -7,6 +7,7 @@ body {
   height: 100vh;
   background-color: ${props => props.theme.backgroundColor};
   color: ${props => props.theme.color};
+  font-family: 'Mulish', sans-serif;
 }
 
 div {

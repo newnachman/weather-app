@@ -62,4 +62,7 @@ const ForecastDayCardWrapper = styled.div`
   grid-column-gap: 2.5%;
   text-align: center;
 
+  @media screen and (max-width: 850px){
+    display: block;
+  }
 `;

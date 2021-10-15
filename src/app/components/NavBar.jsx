@@ -37,6 +37,13 @@ const Navbar = () => {
     setMenuIsDisplayed(!menuIsDisplayed);
   }
 
+  const toggleAfterDelay = (effect) => {
+    toggleMenu();
+    setTimeout(() => {
+      effect();
+    }, 1500);
+  }
+
   return (
      <AppNav>
        <a href="/" className="logo" tabIndex="1">
@@ -44,11 +51,6 @@ const Navbar = () => {
         <img src="/logo-weather.png" alt="" />
        </a>
        <div className="menu-btn-wrp">
-         <div className="menu-arrow">
-          <span>open menu</span>
-          <i className="fa fa-arrow-right"></i>
-          {/* <img src="" alt="arrow directing to menu button" /> */}
-         </div>
         <button tabIndex="2" className="menu-toggler" onClick={toggleMenu}>
          <i className="fa fa-bars"></i>
         </button>
@@ -60,7 +62,7 @@ const Navbar = () => {
          <li>
            <a tabIndex="4" href="/favorites">FAVORITES</a>
          </li>
-         <li onClick={toggleTheme}>      
+         <li onClick={() => {toggleAfterDelay(toggleTheme)}}>      
           <IconWrapper positionTop="150px">
            {themeIsDark ? 
               <>
@@ -75,7 +77,7 @@ const Navbar = () => {
             }
           </IconWrapper> 
          </li>
-         <li onClick={toggleTemperatureMode}>
+         <li onClick={ () => {toggleAfterDelay(toggleTemperatureMode)}}>
           <IconWrapper positionTop="270px">
             {isFahrenheit ? 
                 <>
@@ -99,38 +101,18 @@ export default Navbar;
 
 const AppNav = styled.nav`
   height: 90px;
-  /* background-color: white;
-  border-bottom: 1px solid #8f8f92; */
   
   .menu-btn-wrp {
     display: none;
   }
 
   a.logo span {
+    font-family: 'ZCOOL KuaiLe', cursive;
     text-transform: uppercase;
     font-size: 2rem;
     color: #ff5e2b;
     text-decoration: none;
-    text-shadow: 5px 3px 3px rgb(192 190 190 / 56%);
-  }
-
-  a.logo img {
-    max-width: 50px;
-    transform: rotate(10deg);
-    position: absolute;
-    top: -15px;
-    right: -60px;
-  }
-
-  ul li {
-    display: inline-block;
-    margin: 10px;
-  }
-
-  ul li a {
-    color: ${props => props.theme.color};
-    font-size: 25px;
-    text-decoration: none;
+    /* text-shadow: 5px 3px 3px rgb(192 190 190 / 56%); */
   }
 
   a.logo {
@@ -142,12 +124,46 @@ const AppNav = styled.nav`
     text-decoration: none;
   }
 
-  ul {
-    float: right;
-    margin-right: 20px;
+  a.logo img {
+    max-width: 50px;
+    transform: rotate(10deg);
+    position: absolute;
+    top: -15px;
+    right: -60px;
   }
 
-  @media screen and (max-width: 600px){
+  ul {
+    float: right;
+    margin-right: 3%;
+  }
+
+  ul li {
+    display: inline-block;
+    margin: 15px 40px;
+  }
+
+  ul li a {
+    color: ${props => props.theme.color};
+    font-size: 25px;
+    font-weight: 400;
+    text-decoration: none;
+    transition: all 0.5s ease;
+    border-bottom: 1px solid #ff5e2b;
+  }
+
+  ul li a:hover {
+    color: #ff5e2b;
+    font-weight: 900;
+    padding: 5px;
+    border-bottom: 2px solid #ff5e2b;
+  }
+
+  @media screen and (max-width: 1000px){
+
+    a.logo {
+      left: 5%;
+      top: 40px;
+    }
 
     a.logo span {
       font-size: 1.3rem;
@@ -156,36 +172,21 @@ const AppNav = styled.nav`
 
     .menu-btn-wrp {
       display: block;
-      position: absolute;
-      padding: 0;
-      z-index: 9999;
-      font-size: 25px;
-      color: #ff5e2b;
-      top: 2%;
-      right: 0;
-      width: 200px;
-      border: none;
-      outline: none;
     }
-
-    .menu-arrow {
-      display: inline-block;
-    }
-    .menu-arrow i {
-      margin-left: 10px;
-    }
-
+    
     .menu-toggler {
+      cursor: pointer;
       display: inline-block;
       position: absolute;
-      margin-left: 20px;
+      right: 5%;
+      top: 30px;
       padding: 0;
       z-index: 9999;
-      background-color: #fff;
-      font-size: 25px;
+      font-size: 35px;
       color: #ff5e2b;
       outline: none;
       border: none;
+      background-color: transparent;
     }
 
     ul {
@@ -201,18 +202,29 @@ const AppNav = styled.nav`
       z-index: 99999;
       overflow: hidden;
     }
-
+    
     ul.display{
-      height: 370px;
-      background-color: white;
+      border-bottom: 1px solid #ff5e2b94; 
+      height: 400px;
+      background-color: ${props => props.theme.backgroundColor};
+      box-shadow: 0px 17px 20px 2px #8080806e;
     }
 
     ul li {
       display: block;
-      /* height: 0; */
-      background-color: white;
-      width: 100%;
+      width: 90%;
+      margin: 30px auto;
       border-bottom: 2px solid #e637671c;
+    }
+
+    ul li a {
+      border-bottom: none;
+    }
+
+    ul li a:hover {
+      color: #ff5e2b;
+      font-weight: 900;
+      border-bottom: none;
     }
 
   }
@@ -220,18 +232,26 @@ const AppNav = styled.nav`
 `;
 
 const IconWrapper = styled.div`
+
     position: absolute;
     top: ${(props) => props.positionTop};
-    right: 50px;
-    height: 100px;
+    right: 3%;
+    height: 105px;
     text-align: center;
-    max-width: 90px;
+    width: 95px;
     box-shadow: -2px 2px 4px 0px #000f1efa;
-    padding: 14px;
+    padding: 15px 5px;
     border-radius: 0.3rem;
     border: 1px solid ${(props) => props.theme.color};
+    cursor: pointer;
+    transition: right 1s ease;
+
+    &:hover {
+      right: 4%;
+    }
 
     label {
+      cursor: pointer;
       font-size: 15px;
       display: block;
       margin-top: 5px;
@@ -245,5 +265,39 @@ const IconWrapper = styled.div`
       margin: auto;
       background-color: ${(props) => props.theme.color};
       color: ${(props) => props.theme.backgroundColor};
+    }
+
+    @media screen and (max-width: 1000px){
+
+      position: initial;
+      height: unset;
+    width: 100%;
+    
+    border-radius: 0.3rem;
+    border: 1px solid ${(props) => props.theme.color};
+    cursor: pointer;
+    transition: all 1s ease;
+
+    &:hover {
+      right: 4%;
+    }
+
+    label {
+      cursor: pointer;
+      font-size: 15px;
+      display: block;
+      margin-top: 5px;
+    }
+
+    .weather-circle {
+      border-radius: 50%;
+      padding: 7px;
+      width: 30px;
+      height: 30px;
+      margin: auto;
+      background-color: ${(props) => props.theme.color};
+      color: ${(props) => props.theme.backgroundColor};
+    }
+
     }
 `;

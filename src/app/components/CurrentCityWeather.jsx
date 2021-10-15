@@ -73,6 +73,7 @@ const CurrentCityDiv = styled.div`
   grid-template-columns: 30% 34% 30%;
   grid-column-gap: 2%;
   text-align: center;
+
   & > div {
     display: flex;
     justify-content: center;
@@ -80,6 +81,7 @@ const CurrentCityDiv = styled.div`
     font-size: 2.3rem;
     font-weight: 700;
   }
+  
   .weather-text  {
     margin-left: 30px;
     font-size: 1.8rem;
@@ -105,4 +107,26 @@ const CurrentCityDiv = styled.div`
   img {
     width: 200px;
   }
+
+  
+  @media screen and (max-width: 1000px){
+    width: 90%;
+  }
+
+  @media screen and (max-width: 850px){
+     display: block;
+     margin: 80px auto;
+
+     & > div {
+       margin: 30px auto;
+     }
+
+     .sub-value-note {
+      font-size: 1.5rem;
+      display: inline;
+      margin-left: 10px;
+      position: initial;
+     }
+  }
+
 `;

@@ -41,14 +41,14 @@ export default ForecastDayCard;
 const ForecastDayCardDiv = styled.div`
   border: 1px solid grey;
   min-height: 150px;
-  padding: 10px;
+  padding: 20px;
   font-weight: 600;
 
   .card-header {
     background-color: ${(props) => props.theme.color};
     color: ${(props) => props.theme.backgroundColor};
     padding: 10px;
-    margin: -10px;
+    margin: -20px;
     margin-bottom: 20px;
   }
 
@@ -56,4 +56,10 @@ const ForecastDayCardDiv = styled.div`
     font-weight: 400;
     margin: 5px;
   }
-`
+
+  @media screen and (max-width: 850px){
+    margin: 30px auto;
+  }
+
+
+`;

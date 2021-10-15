@@ -78,5 +78,13 @@ const FavoriteCardDiv = styled.div`
     font-size: 0.8rem;
     color: #ff5e2b;
   }
+
+  @media screen and (max-width: 850px){
+    margin: 30px auto;
+
+    .card-header {
+    padding: 20px;
+    }
+  }
 `;
 

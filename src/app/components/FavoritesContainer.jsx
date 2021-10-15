@@ -59,4 +59,8 @@ const FavoritesCardWrapper = styled.div`
   grid-column-gap: 2.5%;
   grid-row-gap: 20px;
   text-align: center;
+
+  @media screen and (max-width: 850px){
+    display: block;
+  }
 `;
