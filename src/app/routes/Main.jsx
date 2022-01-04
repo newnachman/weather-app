@@ -22,14 +22,11 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(changeTemperatureMode(defaultTemperatureMode));
-
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function(position) {
-        setDetectedCoordinates({status: "SUCCESS", latitude: position.coords.latitude, longitude: position.coords.longitude})
+          setDetectedCoordinates({status: "SUCCESS", latitude: position.coords.latitude, longitude: position.coords.longitude})
       });
-    } else {
-      setDetectedCoordinates({status: "FAILED", })
-    }
+    } 
   }, [dispatch])
 
   useEffect(() => {
@@ -52,7 +49,7 @@ const Main = () => {
   },[response, dispatch])
 
   useEffect(() => {
-     if (detectedCoordinates?.status === "FAILED" || detectedLocation) {
+     if (!detectedCoordinates || detectedLocation) {
       let currentLoc = createCurrentLocation(detectedLocation, defaultLocation, id);
       dispatch(setCurrentLocation(currentLoc));
      }

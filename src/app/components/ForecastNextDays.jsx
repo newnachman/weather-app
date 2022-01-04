@@ -46,7 +46,13 @@ const ForecastNextDays = () => {
       </ForecastDayCardWrapper>
     </section>
     :
-    "Fetching data..."
+
+    <>
+      <MessageWrapper>
+        <div>No data yet...</div>
+        <span>Try to search city in city search box, or alow geo-locations permission on your device, and then refresh page.</span> 
+      </MessageWrapper>
+    </>
   )
 }
 
@@ -60,5 +66,22 @@ const ForecastDayCardWrapper = styled.div`
 
   @media screen and (max-width: 850px){
     display: block;
+  }
+`;
+
+const MessageWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  text-align: center;
+  font-size: 2.2rem;
+  height: 50vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  span {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    color: inherit;
   }
 `;
