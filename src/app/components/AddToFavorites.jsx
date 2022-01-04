@@ -11,11 +11,7 @@ const AddToFavorites = () => {
 
   useEffect(()=> {
       if (currentLocation) {
-        // debugger
         let isLocationSaved = checkIfInArray(currentLocation.key, favoritesArray?.map((fav) => fav.key));
-        // console.log('isLocationSaved: ', isLocationSaved);
-        // console.log('favoritesArray: ', favoritesArray);
-        // console.log('currentLocation: ', currentLocation);
         setIsLocationSaved(isLocationSaved);
       }
   },[currentLocation, favoritesArray]);

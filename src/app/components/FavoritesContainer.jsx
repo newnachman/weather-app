@@ -4,6 +4,7 @@ import {getCurrentWeatherUrl} from '../api/accuweather';
 import styled from 'styled-components';
 import axios from 'axios';
 import FavoriteCard from './FavoriteCard';
+import { Link } from 'react-router-dom';
 
 const FavoritesContainer = () => {
   
@@ -24,16 +25,16 @@ const FavoritesContainer = () => {
     axios.request({ url: getCurrentWeatherUrl(key) }).then((result) => {
       setFavoritesData( (favorites) => ([...favorites, {key, city, country, detail: result.data[0]} ] ))
     }).catch(error => {
-      console.log('response error of createFavoriteDataArray request: ', error);
+      console.error('response error of createFavoriteDataArray request: ', error);
   });
   }
 
   return (
-    favoritesData ?
+    favoritesData.length > 0 ?
     <section>
-      <FavoritesTitle>
-      Favorites:
-      </FavoritesTitle>
+      <h2>
+        Favorites:
+      </h2>
       <FavoritesCardWrapper>
         {favoritesData.map((favorite, i) => {
           return <FavoriteCard key={i} data={favorite} itemKey={i} />
@@ -41,16 +42,32 @@ const FavoritesContainer = () => {
       </FavoritesCardWrapper>
     </section>
     :
-    "Fetching data..."
+    <>
+      <MessageWrapper>
+        <div>No favorites yet...</div>
+        <Link to={"/"}>Go back to MAIN PAGE and add some favorite cities!</Link> 
+      </MessageWrapper>
+    </>
   )
 }
 
 export default FavoritesContainer;
 
+const MessageWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  text-align: center;
+  font-size: 2.2rem;
+  height: 50vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
-
-const FavoritesTitle = styled.h2`
-
+  a, a:visited, a:hover {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    color: inherit;
+  }
 `;
 
 const FavoritesCardWrapper = styled.div`

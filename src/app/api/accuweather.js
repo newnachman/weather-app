@@ -1,19 +1,24 @@
+import { getArrayNumberByTimePassed } from '../helpers/timeHelpers';
+
 
 
 // Default initial weather data:
 export const defaultLocation = {city: "Tel-Aviv", country: 'Israel', key: '215854'}; 
-
 export const defaultTemperatureMode = {mode: 'Metric', name: 'Celsius', unit: 'C'}; 
 // export const defaultTemperatureMode = {mode: 'Imperial', name: 'Fahrenheit', unit: 'F'}; 
 
+// Keys for auth access to accuweather API  - refreshes every period of time:
+const keys = [
+    "hMDNS0V0XlPmv0uL0oBs9DuRHA9Lspe6",
+    "XZmaPqQsLLueLVBAxrE6OTC73dXFCN8A",
+    "wE4p1ikaQLto2D0yaqI5LqJUn2iFEAXr",
+]
 
 // Api key:
-const accuweatherApiKey = '?apikey=' + process.env.REACT_APP_ACCUWEATHER_API_KEY;
+const accuweatherApiKey = '?apikey=' + keys[getArrayNumberByTimePassed(keys.length, 300)];
 
 // Base url:
 const accuweatherBaseUrl = 'http://dataservice.accuweather.com/';
-
-
 
 // Creating dynamic URLs for fetching Api:
 export const getCurrentWeatherUrl = (locationKey) => {

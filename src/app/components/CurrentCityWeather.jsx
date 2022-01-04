@@ -28,7 +28,7 @@ const CurrentCityWeather = () => {
     if (response.data && !response.loading) {
       setCurrentWeather(response.data[0]);
     }
-  },[response])
+  },[response, dispatch])
 
   return (
     <>
@@ -128,5 +128,4 @@ const CurrentCityDiv = styled.div`
       position: initial;
      }
   }
-
 `;

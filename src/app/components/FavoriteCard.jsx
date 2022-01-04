@@ -14,8 +14,6 @@ const FavoriteCard = (props) => {
     history.push(`/main/${id}`);
   }
 
-  console.log(data)
-
   return (
     <Grow in={data ? true : false} style={{ transformOrigin: '0 0 0' }} {...(data ? { timeout: (1000 * (itemKey + 1))} : {})}>
       <FavoriteCardDiv onClick={()=> {goMainWithCurrentCity(`${data.city}::${data.country}::${data.key}`)}}>

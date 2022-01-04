@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getWeatherIconUrl } from '../api/accuweather';
-import { getFormattedDate } from '../helpers/getDate';
+import { getFormattedDate } from '../helpers/timeHelpers';
 
 
 const ForecastDayCard = (props) => {
@@ -11,7 +11,6 @@ const ForecastDayCard = (props) => {
   
   return (
     <ForecastDayCardDiv>
-      
       <div className="card-header">
         <div className="primary-date">
           {day}
@@ -60,6 +59,4 @@ const ForecastDayCardDiv = styled.div`
   @media screen and (max-width: 850px){
     margin: 30px auto;
   }
-
-
 `;

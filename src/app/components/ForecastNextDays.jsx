@@ -52,10 +52,6 @@ const ForecastNextDays = () => {
 
 export default ForecastNextDays;
 
-// const ForecastNextDaysTitle = styled.h2`
-// color: #003c7d;
-// `;
-
 const ForecastDayCardWrapper = styled.div`
   display: grid;
   grid-template-columns: 18% 18% 18% 18% 18%;

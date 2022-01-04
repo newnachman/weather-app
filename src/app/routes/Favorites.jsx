@@ -1,15 +1,10 @@
 import React from 'react';
 import FavoritesContainer from '../../app/components/FavoritesContainer';
 import Navbar from './../components/NavBar';
-import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 
 const Favorites = () => {
-
-  const {currentLocation, favoritesArray} = useSelector(state => state);
-  const dispatch = useDispatch();
-
 
   return (
     <>

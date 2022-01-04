@@ -3,7 +3,6 @@ import MainWeatherContainer from './../components/MainWeatherContainer';
 import SearchInput from '../components/SearchInput';
 import Navbar from './../components/NavBar';
 import styled from 'styled-components';
-
 import { useDispatch } from 'react-redux';
 import { defaultLocation, defaultTemperatureMode, getLocationKeyByPositionUrl } from '../api/accuweather';
 import { setCurrentLocation, changeTemperatureMode, setSnackbar } from './../redux/Actions';

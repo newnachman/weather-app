@@ -112,7 +112,6 @@ const AppNav = styled.nav`
     font-size: 2rem;
     color: #ff5e2b;
     text-decoration: none;
-    /* text-shadow: 5px 3px 3px rgb(192 190 190 / 56%); */
   }
 
   a.logo {

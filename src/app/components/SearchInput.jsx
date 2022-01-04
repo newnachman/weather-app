@@ -57,9 +57,9 @@ const SearchInput = () => {
   }
 
   return (
-     <SearchInputDiv themeIsDark = {themeIsDark}>
+     <SearchInputDiv themeisdark = {themeIsDark.toString()}>
         <SearchBox
-          themeIsDark = {themeIsDark}
+          themeisdark = {themeIsDark.toString()}
           getOptionSelected ={(option, value) => option.locationDisplay === value.locationDisplay}
           onInputChange = { (e) => { e && searchInputChange(e.target.value); }}
           inputValue = {searchWord}
@@ -76,7 +76,7 @@ const SearchInput = () => {
 export default SearchInput;
 
 const SearchInputDiv = styled.div`
-  background-color: ${props => props.themeIsDark ? "#214163" : props.theme.color}; 
+  background-color: ${props => props.themeisdark === "true" ? "#214163" : props.theme.color}; 
   color: #ffffff;
   width: 100%;
   margin: auto;
@@ -90,7 +90,7 @@ const SearchBox = styled(Autocomplete)`
   border: none !important;
 
   .MuiFormControl-root {
-    background-color: ${props => props.themeIsDark ? "#d6dbef" : "#fff"} ;
+    background-color: ${props => props.themeisdark === "true" ? "#d6dbef" : "#fff"} ;
   }
 
   .MuiFormControl-root fieldset {
@@ -105,7 +105,7 @@ const SearchBox = styled(Autocomplete)`
 
   label#combo-box-demo-label {
     color: #003c7d;
-    background-color: ${props => props.themeIsDark ? "#d6dbef" : "#fff"} ;
+    background-color: ${props => props.themeisdark === "true" ? "#d6dbef" : "#fff"} ;
     padding: 10px;
     border-radius: 0.5rem;
     outline: none;
