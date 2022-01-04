@@ -9,13 +9,15 @@ export const defaultTemperatureMode = {mode: 'Metric', name: 'Celsius', unit: 'C
 
 // Keys for auth access to accuweather API  - refreshes every period of time:
 const keys = [
+    "wE4p1ikaQLto2D0yaqI5LqJUn2iFEAXr",
     "hMDNS0V0XlPmv0uL0oBs9DuRHA9Lspe6",
     "XZmaPqQsLLueLVBAxrE6OTC73dXFCN8A",
-    "wE4p1ikaQLto2D0yaqI5LqJUn2iFEAXr",
 ]
 
 // Api key:
-const accuweatherApiKey = '?apikey=' + keys[getArrayNumberByTimePassed(keys.length, 300)];
+const currentKey = keys[getArrayNumberByTimePassed(keys.length, 300)];
+console.log('currentKey:', currentKey);
+const accuweatherApiKey = '?apikey=' + currentKey;
 
 // Base url:
 const accuweatherBaseUrl = 'https://dataservice.accuweather.com/';
