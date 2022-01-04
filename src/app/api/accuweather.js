@@ -18,7 +18,7 @@ const keys = [
 const accuweatherApiKey = '?apikey=' + keys[getArrayNumberByTimePassed(keys.length, 300)];
 
 // Base url:
-const accuweatherBaseUrl = 'http://dataservice.accuweather.com/';
+const accuweatherBaseUrl = 'https://dataservice.accuweather.com/';
 
 // Creating dynamic URLs for fetching Api:
 export const getCurrentWeatherUrl = (locationKey) => {
