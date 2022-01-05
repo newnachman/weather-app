@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { useFetch } from '../hooks/useFetch';
-import {getCurrentWeatherUrl, getWeatherIconUrl} from '../api/accuweather';
+import {getCurrentWeatherUrl, getWeatherIconUrl, changeKey} from '../api/accuweather';
 import Grow from '@material-ui/core/Grow';
 import { useDispatch } from 'react-redux';
 import { setSnackbar } from './../redux/Actions';
@@ -23,6 +23,7 @@ const CurrentCityWeather = () => {
   useEffect(() => {
     if (response.error) {
       dispatch(setSnackbar({display: true, message: `There was a problem retrieving data in: ${response.data} please try later or contact us if the problem persists`, type: "error"}));
+      changeKey();
       return;
     }
     if (response.data && !response.loading) {

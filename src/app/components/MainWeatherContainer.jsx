@@ -5,6 +5,7 @@ import ForecastNextDays from './ForecastNextDays';
 import styled from 'styled-components';
 
 const MainWeatherContainer = () => {
+
   return (
     <MainWeatherDiv>
       <AddToFavorites/>

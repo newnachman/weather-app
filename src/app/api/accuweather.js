@@ -1,4 +1,4 @@
-import { getArrayNumberByTimePassed } from '../helpers/timeHelpers';
+import { getArrayNumberByTimePassed, changeAccessKeyNumber} from '../helpers/timeHelpers';
 
 
 
@@ -7,16 +7,21 @@ export const defaultLocation = {city: "Tel-Aviv", country: 'Israel', key: '21585
 export const defaultTemperatureMode = {mode: 'Metric', name: 'Celsius', unit: 'C'}; 
 // export const defaultTemperatureMode = {mode: 'Imperial', name: 'Fahrenheit', unit: 'F'}; 
 
-// Keys for auth access to accuweather API  - refreshes every period of time:
+// Keys for auth access to accuweather API:
 const keys = [
+    "hXUwroSoLsNYusB47tLETxNfYXNtt9JZ",
     "wE4p1ikaQLto2D0yaqI5LqJUn2iFEAXr",
     "hMDNS0V0XlPmv0uL0oBs9DuRHA9Lspe6",
     "XZmaPqQsLLueLVBAxrE6OTC73dXFCN8A",
 ]
 
+// If one key is blocked, change to other key:
+export const changeKey = () => {
+    changeAccessKeyNumber(keys.length);
+}
+
 // Api key:
-const currentKey = keys[getArrayNumberByTimePassed(keys.length, 300)];
-console.log('currentKey:', currentKey);
+const currentKey = keys[getArrayNumberByTimePassed(keys.length, 900)];
 const accuweatherApiKey = '?apikey=' + currentKey;
 
 // Base url:

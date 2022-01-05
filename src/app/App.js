@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Favorites from './routes/Favorites';
 import Main from './routes/Main';
@@ -11,13 +11,32 @@ import { setSnackbar } from './redux/Actions';
 import styled, {ThemeProvider} from 'styled-components';
 import { Snackbar } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
+import ScrollButton from "./components/ScrollButton";
 
 
 const App = () => {
 
+  const [showScrollButton, setShowScrollButton] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+  
+  const handleScroll = () => {
+    if (window.scrollY >= 300) {
+      setShowScrollButton(true);
+    } else {
+      setShowScrollButton(false);
+    }
+  }
+
   const themeIsDark = useSelector(state => state.themeIsDark);
   const snackbarState = useSelector(state => state.snackbarState);
   const dispatch = useDispatch();
+
   const handleClose = () => {
     dispatch(setSnackbar({display: false, message: "", type: ""}));
   }
@@ -35,6 +54,7 @@ const App = () => {
             <Route exact path="*" component={Main}></Route>
           </Switch>
         </Router>
+        <ScrollButton showScrollButton={showScrollButton}/>
         {snackbarState &&
         <Snackbar open={snackbarState.display} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
           <Alert onClose={handleClose} severity={snackbarState.type} sx={{ width: '100%' }}>

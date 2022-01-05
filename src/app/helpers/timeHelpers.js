@@ -23,7 +23,9 @@ export const getArrayNumberByTimePassed = (arrayLength, interval) => {
 
   // Get data from storage:
   let lastTime = localStorage.getItem('time') ? Number(localStorage.getItem('time')) : null;
-  let lastArrayNumber = localStorage.getItem('number') ? Number(localStorage.getItem('number')): null;
+  let storageNumber = localStorage.getItem('number');
+  // Verify that storage number is set already:
+  let lastArrayNumber = storageNumber ? Number(storageNumber): null;
 
   if (lastTime && (lastArrayNumber || lastArrayNumber === 0)) {
     if (currentTime - lastTime >= interval) {
@@ -39,3 +41,25 @@ export const getArrayNumberByTimePassed = (arrayLength, interval) => {
   localStorage.setItem('number', currentNumber); // current number is 0
   return currentNumber;
 }
+
+// This function can be accessed from outside too.
+export const changeAccessKeyNumber = (arrayLength) => {
+  let maximumLength = arrayLength -1;
+  let storageNumber = localStorage.getItem('number');
+  // Verify that storage number is set already, otherwise set it to 0:
+  let lastArrayNumber = storageNumber ? Number(storageNumber): 0;
+
+  // Change the number:
+  let newNumber = (lastArrayNumber >= maximumLength) ? 0 : lastArrayNumber + 1;
+  // Get current time:
+  let currentTime = (new Date().getTime()) / 1000;
+
+  // Insert to local storage:
+  localStorage.setItem('time', currentTime);
+  localStorage.setItem('number', newNumber); 
+  
+  setTimeout(() => {
+    window.location.reload();
+  }, 500);
+}
+

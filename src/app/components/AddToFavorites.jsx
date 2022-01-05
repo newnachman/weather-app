@@ -8,7 +8,7 @@ const AddToFavorites = () => {
   const {currentLocation, favoritesArray} = useSelector(state => state);
   const [isLocationSaved, setIsLocationSaved] = useState(false);
   const dispatch = useDispatch();
-
+  
   useEffect(()=> {
       if (currentLocation) {
         let isLocationSaved = checkIfInArray(currentLocation.key, favoritesArray?.map((fav) => fav.key));
