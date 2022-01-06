@@ -41,7 +41,7 @@ const Navbar = () => {
     toggleMenu();
     setTimeout(() => {
       effect();
-    }, 1500);
+    }, 700);
   }
 
   return (
@@ -225,9 +225,7 @@ const AppNav = styled.nav`
       font-weight: 900;
       border-bottom: none;
     }
-
   }
-
 `;
 
 const IconWrapper = styled.div`
@@ -270,33 +268,32 @@ const IconWrapper = styled.div`
 
       position: initial;
       height: unset;
-    width: 100%;
+      width: 100%;
     
-    border-radius: 0.3rem;
-    border: 1px solid ${(props) => props.theme.color};
-    cursor: pointer;
-    transition: all 1s ease;
-
-    &:hover {
-      right: 4%;
-    }
-
-    label {
+      border-radius: 0.3rem;
+      border: 1px solid ${(props) => props.theme.color};
       cursor: pointer;
-      font-size: 15px;
-      display: block;
-      margin-top: 5px;
-    }
+      transition: all 1s ease;
 
-    .weather-circle {
-      border-radius: 50%;
-      padding: 7px;
-      width: 30px;
-      height: 30px;
-      margin: auto;
-      background-color: ${(props) => props.theme.color};
-      color: ${(props) => props.theme.backgroundColor};
-    }
+      &:hover {
+        right: 4%;
+      }
 
+      label {
+        cursor: pointer;
+        font-size: 15px;
+        display: block;
+        margin-top: 5px;
+      }
+
+      .weather-circle {
+        border-radius: 50%;
+        padding: 7px;
+        width: 30px;
+        height: 30px;
+        margin: auto;
+        background-color: ${(props) => props.theme.color};
+        color: ${(props) => props.theme.backgroundColor};
+      }
     }
 `;
